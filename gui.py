@@ -3,7 +3,7 @@ from usb_utils import *
 from file_ops import *
 import os
 
-# --- Color Theme ---
+# color theme
 colors = {
     "background": "#f0f0f0",      # light grey
     "text": "#000000",            # black
@@ -17,12 +17,12 @@ colors = {
 
 sg.theme("LightGrey1")
 
-# --- Helper: Check if drive is connected ---
+# helpers
 def is_drive_connected(label):
     drive = get_usb_drive_by_label(label)
     return drive and os.path.exists(drive + "\\")
 
-# --- Console message formatter ---
+# console message formatter
 def ColorMsg(window, element_name, message_type, message):
     txt = window[element_name].Widget
     color_map = {
@@ -35,7 +35,7 @@ def ColorMsg(window, element_name, message_type, message):
     txt.insert("end", message + "\n", message_type)
     window[element_name].Update("", append=True)
 
-# --- USB Error Popup ---
+# USB error popup
 def custom_error_popup(message):
     layout = [
         [sg.Text(message)],
@@ -46,7 +46,7 @@ def custom_error_popup(message):
     window.close()
     return event
 
-# --- Main GUI launcher ---
+# main GUI launcher
 def launch_gui():
     try:
         usb_volumes = select_usb()
@@ -105,7 +105,7 @@ def launch_gui():
             ColorMsg(window, "protocol", "warning", "No USB volume selected.")
             continue
 
-        # Check if USB is still connected
+        # check if USB is still connected
         if not is_drive_connected(selected_volume):
             ColorMsg(window, "protocol", "error", f"USB '{selected_volume}' is no longer connected.")
             usb_volumes = select_usb()
@@ -121,7 +121,7 @@ def launch_gui():
 
         selected_drive = get_usb_drive_by_label(selected_volume)
         file_path = os.path.join(selected_drive, "ptf.ptf")
-
+        
         if event == "Format":
             try:
                 format_usb(label=selected_volume)

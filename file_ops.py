@@ -3,6 +3,7 @@ import os
 import shutil
 import re
 
+# invert colors function
 def toggle_enLvdsFormat(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
@@ -21,6 +22,7 @@ def toggle_enLvdsFormat(file_path):
     with open(file_path, "w", encoding="utf-8") as f:
         f.writelines(lines)
 
+# mirror image function
 def toggle_b8Flip_lines(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
@@ -50,6 +52,7 @@ def toggle_b8Flip_lines(file_path):
     with open(file_path, "w", encoding="utf-8") as f:
         f.writelines(lines)
 
+# insert downloadpq.mb211 file
 def insert_blank(label, filename="downloadpq.mb211"):
     usb_drive = get_usb_drive_by_label(label)
     if not usb_drive:
@@ -61,6 +64,7 @@ def insert_blank(label, filename="downloadpq.mb211"):
 
     print(f"Blank file '{filename}' created on USB drive at: {blank_file_path}")
 
+# create and save pq folder
 def save_pq(label):
     usb_drive = get_usb_drive_by_label(label)
     if not usb_drive:
@@ -70,23 +74,22 @@ def save_pq(label):
     blank_file = os.path.join(usb_drive, "downloadpq.mb211")
     pq_folder = os.path.join(usb_drive, "pq")
 
-    # Delete DVR folder if exists
+    # delete DVR folder
     if os.path.exists(dvr_folder) and os.path.isdir(dvr_folder):
         shutil.rmtree(dvr_folder)
         print(f"Deleted folder: {dvr_folder}")
 
-    # Delete downloadpq.mb211 file if exists
+    # delete downloadpq.mb211 file
     if os.path.exists(blank_file) and os.path.isfile(blank_file):
         os.remove(blank_file)
         print(f"Deleted file: {blank_file}")
 
-    # Create pq folder if it doesn't exist
+    # create pq folder and move files
     os.makedirs(pq_folder, exist_ok=True)
-
-    # Move all remaining files/folders (except pq) into pq folder
+    
     for item in os.listdir(usb_drive):
         if item == "pq":
-            continue  # Skip pq folder itself
+            continue
         src = os.path.join(usb_drive, item)
         dst = os.path.join(pq_folder, item)
 

@@ -4,7 +4,7 @@ Steps
 
 python -m venv venv  
 venv\Scripts\Activate.ps1  
-pip install --upgrade --extra-index-url https://PySimpleGUI.net/install PySimpleGUI pyserial
+pip install --upgrade --extra-index-url https://PySimpleGUI.net/install PySimpleGUI pyserial  
 open Powershell as Admin or use this line:   
 Start-Process powershell -Verb RunAs -ArgumentList "-NoExit", "-Command", "Set-Location -LiteralPath '$($PWD.Path)'; . .\venv\Scripts\Activate.ps1"  
 python main.py  

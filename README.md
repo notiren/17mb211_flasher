@@ -1,18 +1,18 @@
 # 17mb211_flasher
 
-Steps
+## Steps
 
-python -m venv venv  
-venv\Scripts\Activate.ps1  
-pip install --upgrade --extra-index-url https://PySimpleGUI.net/install PySimpleGUI pyserial  
-open Powershell as Admin or use this line:   
-Start-Process powershell -Verb RunAs -ArgumentList "-NoExit", "-Command", "Set-Location -LiteralPath '$($PWD.Path)'; . .\venv\Scripts\Activate.ps1"  
-python main.py  
+Create a venv with:  
+`python -m venv venv`  
+`venv\Scripts\Activate.ps1`    
 
-# Optional: create Executable
+Install requirements:  
+`pip install --upgrade --extra-index-url https://PySimpleGUI.net/install PySimpleGUI pyserial`   
+  
+Open Powershell as Admin or use this line:   
+`Start-Process powershell -Verb RunAs -ArgumentList "-NoExit", "-Command", "Set-Location -LiteralPath '$($PWD.Path)'; . .\venv\Scripts\Activate.ps1"`  
 
-pip install pyinstaller  
-pyinstaller main.spec  
-
-Executable will be created in dist/ folder  
-Run Exe as Administrator
+Run with:  
+`python main.py `  
+  
+Or click on __`EXE.ps1`__

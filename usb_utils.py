@@ -40,13 +40,14 @@ def format_usb(label):
         raise RuntimeError(f"USB drive with label '{label}' not found.")
     ps_script = f"""
     $driveLetter = "{usb_drive.replace(':', '')}"
+    # Format only the existing partition without deleting or repartitioning
     $partition = Get-Partition -DriveLetter $driveLetter
-    $disk = Get-Disk -Number $partition.DiskNumber
-    $disk | Clear-Disk -RemoveData -Confirm:$false
-    Initialize-Disk -Number $disk.Number -PartitionStyle MBR
-    New-Partition -DiskNumber $disk.Number -UseMaximumSize -AssignDriveLetter |
-    Format-Volume -FileSystem FAT32 -NewFileSystemLabel '{label}' -Confirm:$false
+    if ($partition -eq $null) {{
+        throw "Partition with drive letter $driveLetter not found."
+    }}
+    Format-Volume -Partition $partition -FileSystem FAT32 -NewFileSystemLabel '{label}' -Confirm:$false -Force
     """
     result = run_powershell_hidden(ps_script)
     if result.returncode != 0:
         raise RuntimeError("USB format failed: " + result.stderr)
+

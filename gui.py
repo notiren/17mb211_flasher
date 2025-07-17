@@ -1,4 +1,4 @@
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 from usb_utils import *
 from file_ops import *
 import os
@@ -41,7 +41,7 @@ def custom_error_popup(message):
         [sg.Text(message)],
         [sg.Button("Refresh USBs", key="REFRESH"), sg.Button("Exit")]
     ]
-    window = sg.Window("USB Error", layout, modal=True)
+    window = sg.Window("", layout, modal=True)
     event, _ = window.read()
     window.close()
     return event

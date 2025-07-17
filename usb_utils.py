@@ -50,4 +50,6 @@ def format_usb(label):
     result = run_powershell_hidden(ps_script)
     if result.returncode != 0:
         raise RuntimeError("USB format failed: " + result.stderr)
+    else:
+        print(f"USB '{label}' has been formatted.")
 

@@ -7,12 +7,15 @@ Create a venv with:
 `venv\Scripts\Activate.ps1`    
 
 Install requirements:  
-`pip install --upgrade --extra-index-url https://PySimpleGUI.net/install PySimpleGUI pyserial`   
+`pip install --upgrade --no-cache-dir FreeSimpleGUI pyserial`   
   
-Open Powershell as Admin or use this line:   
+### How to Run
+Use this command to run Powershell as Admin:   
 `Start-Process powershell -Verb RunAs -ArgumentList "-NoExit", "-Command", "Set-Location -LiteralPath '$($PWD.Path)'; . .\venv\Scripts\Activate.ps1"`  
 
-Run with:  
+And run with:  
 `python main.py `  
   
+##  
+
 Or click on __`EXE.ps1`__

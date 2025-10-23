@@ -46,10 +46,11 @@ If you get an error like:
 
 > `script cannot be loaded because running scripts is disabled on this system`
 
-Run this in PowerShell:
+Run these commands in PowerShell:
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+Get-ChildItem -Recurse -Filter *.ps1 -File | Unblock-File
 ```
 
 ---
